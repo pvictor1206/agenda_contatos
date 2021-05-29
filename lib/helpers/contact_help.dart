@@ -123,6 +123,8 @@ class Contact {
   String phone;
   String img;
 
+  Contact();
+
   // Construtor chamado fromMap, armazenar os dados em formato de mapas
   Contact.fromMap(Map map) {
     id = map[idColumn];
