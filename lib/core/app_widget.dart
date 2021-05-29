@@ -9,7 +9,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       title: 'Lista de tarefas',
       debugShowCheckedModeBanner: false,
-      home: ContactPage(), //Tela principal
+      home: HomePage(), //Tela principal
     );
   }
 }

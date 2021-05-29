@@ -1,4 +1,5 @@
 import 'package:agenda_contatos/helpers/contact_help.dart';
+import 'package:agenda_contatos/home/contact_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -23,13 +24,7 @@ class _HomePageState extends State<HomePage> {
 
     super.initState();
 
-    helper.getAllContacts().then((list){
-      setState(() {
-        contacts = list;
-      });
-    });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +36,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: (){
+          _showContactPage();
 
         },
         child: Icon(Icons.add),
@@ -101,8 +97,36 @@ class _HomePageState extends State<HomePage> {
             ,
           ),
         ),
+      onTap: (){
+        _showContactPage(contact: contacts[index]);
+      },
       );
 
+  }
+
+  void _showContactPage({Contact contact}) async{
+    final recContact = await Navigator.push(context,
+    MaterialPageRoute(
+        builder: (context) => ContactPage(contact: contact,)
+    )
+    );
+    if(recContact != null){
+      if(contact != null){
+        await helper.updateContact(recContact);
+      }
+      else{
+        await helper.saveContact(recContact);
+      }
+      _getAllContacts();
+    }
+  }
+
+  void _getAllContacts(){
+    helper.getAllContacts().then((list){
+      setState(() {
+        contacts = list;
+      });
+    });
   }
 
 }
