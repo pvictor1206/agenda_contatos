@@ -3,8 +3,7 @@ import 'package:agenda_contatos/home/contact_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
-
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -32,6 +31,8 @@ class _HomePageState extends State<HomePage> {
         title: Text("Contatos"),
         backgroundColor: Colors.red,
         centerTitle: true,
+        actions: [
+        ],
       ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
@@ -122,7 +123,8 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.all(10.0),
                       child: FlatButton(
                           onPressed: (){
-
+                            launch("tel:${contacts[index].phone}");
+                            Navigator.pop(context);
                           },
                           child: Text("Ligar",
                             style: TextStyle(fontSize: 20.0, color: Colors.red ),

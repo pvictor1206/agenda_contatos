@@ -2,6 +2,7 @@ import 'package:agenda_contatos/helpers/contact_help.dart';
 import 'package:flutter/material.dart';
 import 'package:agenda_contatos/helpers/contact_help.dart';
 import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class ContactPage extends StatefulWidget {
   //const ContactPage({Key key}) : super(key: key);
@@ -82,7 +83,10 @@ class _ContactPageState extends State<ContactPage> {
                             AssetImage("")
                         ),
                       ),
-                    )
+                    ),
+                  onTap: (){
+                      ImagePicker.platform.pickImage(source: ImageSource.gallery);
+                  },
                 ),
                 TextField(
                   focusNode: _nameFocus,
